@@ -187,37 +187,35 @@ exports.updateUser = (req, res) => {
                                 message: 'A user registered with this email exists in the system.'
                             })
                         }
-                        // After determining that the email address is not registered in the system, we update the user information.
-                        user.firstName = req.body.firstName || user.firstName,
-                            user.lastName = req.body.lastName || user.lastName,
-                            user.birthday = req.body.birthday || user.birthday,
-                            user.balance = req.body.balance || user.balance,
-                            user.email = email || user.email
-
-                        user.save()
-                            .then((updatedUser) => {
-                                res.status(200).json({
-                                    status: 200,
-                                    message: 'User updated successfully',
-                                    data: updatedUser
-                                })
-                            }).catch((err) => {
-                                res.status(500).json({ status: 500, message: err.message })
-                            });
-
-                    }).catch(() => {
-                        res.status(404).json({
-                            status: 404,
-                            message: 'User not found'
-                        })
-                    });
+                    })
+                    .catch((err) => {
+                        res.status(500).json({ status: 500, message: err.message })
+                    })
             }
+            // After determining that the email address is not registered in the system, we update the user information.
+            user.firstName = req.body.firstName || user.firstName,
+                user.lastName = req.body.lastName || user.lastName,
+                user.birthday = req.body.birthday || user.birthday,
+                user.balance = req.body.balance || user.balance,
+                user.email = email || user.email
+            user.save()
+                .then((updatedUser) => {
+                    res.status(200).json({
+                        status: 200,
+                        message: 'User updated successfully',
+                        data: updatedUser
+                    })
+                }).catch((err) => {
+                    res.status(500).json({ status: 500, message: err.message })
+                });
+
         }).catch(() => {
             res.status(404).json({
                 status: 404,
                 message: 'User not found'
-            });
+            })
         });
+
 };
 
 //RESET PASSWORD
