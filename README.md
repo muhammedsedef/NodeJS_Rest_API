@@ -1,4 +1,4 @@
-# Sigma_Rest_API
+# NodeJS_Rest_API
 
 ## Requirements
 
